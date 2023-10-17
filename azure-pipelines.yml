@@ -15,8 +15,15 @@ steps:
     versionSpec: '16.x'
   displayName: 'Install Node.js'
 
+- task: Publish@1
+  inputs:
+    targetPath: $(System.DefaultWorkingDirectory)/
+    artifactName: ngrx-test-1.0.0.tgz
+
 - script: |
     npm install -g @angular/cli
     npm install
     ng build --prod
-  displayName: 'npm install and build'
+    npm pack
+  displayName: 'npm install, build and pack'
+
